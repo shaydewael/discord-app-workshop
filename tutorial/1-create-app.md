@@ -65,4 +65,14 @@ A scope that's worth calling out (and one we're about to use) is the `bot` scope
 
 If you're like me and need visual confirmation that your app was successfully installed, you can go over to the server you selected in the installation flow and make sure you can see your app in the member list.
 
-<TODO: onwards and up to step 2>
+### Next steps
+
+Now that the app is created and installed, we'll add the credentials to our project file.
+
+#### Table of contents
+
+- [x] [Step 0 - Project setup](0-remix.md)
+- [x] [Step 1 - Create app](1-create-app.md)
+- [ ] 👉 **Next: [Step 2 - Setup credentials and interactivity](2-setup.md)**
+- [ ] [Step 3 - Register and handle slash command](3-command.md)
+- [ ] [Step 4 - Add message components](4-components.md)

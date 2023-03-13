@@ -257,3 +257,15 @@ const userInput = data.options ? data.options[0]['value'] : null;
 ```
 
 If a user filled out our optional command option, it'll appear in the request payload's `options` object. The above line checks if `options` exist, and if it does, fetches the value in it.
+
+### Next steps
+
+Now that we're handling and responding to the slash command, let's finish up by adding even more interactivity by adding message components.
+
+#### Table of contents
+
+- [x] [Step 0 - Project setup](0-remix.md)
+- [x] [Step 1 - Create app](1-create-app.md)
+- [x] [Step 2 - Setup credentials and interactivity](2-setup.md)
+- [x] [Step 3 - Register and handle slash command](3-command.md)
+- [ ] 👉 **Next: [Step 4 - Add message components](4-components.md)**

@@ -81,3 +81,15 @@ If it doesn't save, open **📝 Logs** in your Glitch project and check to make 
 - Make sure that the `Listening on port 3000` output is in the logs. `3000` is the port Glitch uses so make sure that value is correct.
 - Double check that your Glitch project URL ends in `.me` and matches the URL for *your* Glitch project (each project has a different URL).
 - Make sure that `/interactions` is appended to your Glitch project URL in the **Interactive Endpoint URL** field.
+
+### Next steps
+
+With the app set up and ready to go, let's start adding logic by registering and handling a command.
+
+#### Table of contents
+
+- [x] [Step 0 - Project setup](0-remix.md)
+- [x] [Step 1 - Create app](1-create-app.md)
+- [x] [Step 2 - Setup credentials and interactivity](2-setup.md)
+- [ ] 👉 **Next: [Step 3 - Register and handle slash command](3-command.md)**
+- [ ] [Step 4 - Add message components](4-components.md)
