@@ -22,8 +22,6 @@ app.post('/interactions', async function (req, res) {
   // Interaction type and data
   const { type, id, data, token, member } = req.body;
 
-  const currentUnixTime = Math.floor(Date.now() / 1000);
-
   /**
    * Handle verification requests
    */
@@ -40,7 +38,9 @@ app.post('/interactions', async function (req, res) {
 
     // Name of the application command
     if (name === 'fortune') {
-      const userId = member.user ? member.user.id : 'Someone';
+      // Fetch the question the user asked (if it exists)
+      const userInput = data.options ? data.options[0]['value'] : null;
+      // Create the fortune image that we'll send to the user
       await generateRandomFortune(id);
 
       // See all interaction callback types https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
@@ -51,19 +51,13 @@ app.post('/interactions', async function (req, res) {
 
       // Use the unique ID as a temporary filename for the image we generate
       const fileName = `${id}-fortune.png`;
-      // Fetch the question the user asked (if it exists)
-      const userInput = data.options ? data.options[0]['value'] : null;
-      // Text that appears above the image in the message embed
-      const embedHeader = userInput
-        ? `<t:${currentUnixTime}:R> <@${userId}> asked "${userInput}"`
-        : `<@${userId}>'s fortune awaits...`;
       // Get image that was generated
       const generatedFortune = await fs.createReadStream(`./${fileName}`);
       // Build the payload for the Discord message
-      const embed = buildFortuneEmbed(userId, fileName, embedHeader);
+      const embed = buildFortuneEmbed(member.user.id, fileName, userInput);
 
       // Create the FormData for Discord request
-      // FormData because we're doing a file upload
+      // FormData is not required for simple messages, but we're using because we're doing a file upload
       const payload = new FormData();
       // Add the embed JSON to the payload
       payload.append('payload_json', embed);
@@ -96,7 +90,6 @@ app.post('/interactions', async function (req, res) {
     const { custom_id } = data;
 
     if (custom_id === 'redo_button') {
-      const userId = member.user ? member.user.id : 'Someone';
       await generateRandomFortune(id);
       // Acknowledge the message
       await res.send({
@@ -105,12 +98,10 @@ app.post('/interactions', async function (req, res) {
 
       // Use the unique ID as a temporary filename for the image we generate
       const fileName = `${id}-fortune.png`;
-      // Text that appears above the image in the message embed
-      const embedHeader = `<@${userId}>'s (new) fortune awaits...`;
       // Get image that was generated
       const generatedFortune = await fs.createReadStream(`./${fileName}`);
       // Build the payload for the Discord message
-      const embed = buildFortuneEmbed(userId, fileName, embedHeader);
+      const embed = buildFortuneEmbed(member.user.id, fileName, null);
 
       // Create the FormData for Discord request
       // FormData because we're doing a file upload
@@ -158,7 +149,14 @@ async function generateRandomFortune(id) {
  * @param fileName File name of the image included in the embed
  * @param header   Text to include at the top of the embed
  */
-function buildFortuneEmbed(userId, fileName, header) {
+function buildFortuneEmbed(userId, fileName, userInput) {
+  // Get current time to include
+  const currentUnixTime = Math.floor(Date.now() / 1000);
+  // Text that will appear above the image in the message embed
+  const embedDescription = userInput
+    ? `<t:${currentUnixTime}:R> <@${userId}> asked "${userInput}"`
+    : `<@${userId}>'s fortune awaits...`;
+
   const attachments = [
     {
       id: 0,
@@ -169,7 +167,7 @@ function buildFortuneEmbed(userId, fileName, header) {
   const payload = {
     embeds: [
       {
-        description: header,
+        description: embedDescription,
         image: { url: `attachment://${fileName}` },
         color: 8226557,
       },

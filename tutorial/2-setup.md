@@ -88,8 +88,8 @@ With the app set up and ready to go, let's start adding logic by registering and
 
 #### Table of contents
 
-- [x] [Step 0 - Project setup](0-remix.md)
-- [x] [Step 1 - Create app](1-create-app.md)
-- [x] [Step 2 - Setup credentials and interactivity](2-setup.md)
+- [x] ~~[Step 0 - Project setup](0-remix.md)~~
+- [x] ~~[Step 1 - Create app](1-create-app.md)~~
+- [x] ~~[Step 2 - Setup credentials and interactivity](2-setup.md)~~
 - [ ] 👉 **Next: [Step 3 - Register and handle slash command](3-command.md)**
 - [ ] [Step 4 - Add message components](4-components.md)

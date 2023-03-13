@@ -26,11 +26,24 @@ Below is a basic overview of the project structure:
 └── .gitignore
 ```
 
+## Remix on Glitch
+
+To follow along with the workshop:
+
+1. [Login to Glitch](https://glitch.com/signin) (or if you don't have an account, you can [sign up for one](https://glitch.com/signup)).
+2. [🎏 Remix the project](https://glitch.com/edit/#!/import/git?url=https://github.com/shaydewael/discord-app-workshop.git)
+
 ## Guided tutorial
 
 This repo also contains a guided tutorial that follows the steps of the workshop so that you have something to reference during and after.
 
-👉 **[Go to the guided tutorial](tutorial/0-remix.md)**
+#### Table of contents
+
+- [ ] [Step 0 - Project setup](tutorial/0-remix.md)
+- [ ] [Step 1 - Create app](tutorial/1-create-app.md)
+- [ ] [Step 2 - Setup credentials and interactivity](tutorial/2-setup.md)
+- [ ] [Step 3 - Register and handle slash command](tutorial/3-command.md)
+- [ ] [Step 4 - Add message components](tutorial/4-components.md)
 
 ## Additional Resources
 - Read **[the documentation](https://discord.com/developers/docs/intro)** for in-depth information about API features.

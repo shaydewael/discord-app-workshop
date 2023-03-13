@@ -98,7 +98,7 @@ This is now only responding to commands that have the name "fortune". If you run
 While we could stop there and just respond with simple text, we can take it to the next level and respond with an embed that contains a more engaging image. Before we change the code from above, let's create an embed payload. In `app.js`, you'll see the following near the bottom:
 
 ```javascript
-function buildFortuneEmbed(userId, fileName, header) {
+function buildFortuneEmbed(userId, fileName, userInput) {
   // TODO: create embed payload
 }
 ```
@@ -106,7 +106,14 @@ function buildFortuneEmbed(userId, fileName, header) {
 Replace that function with the following:
 
 ```javascript
-function buildFortuneEmbed(userId, fileName, header) {
+function buildFortuneEmbed(userId, fileName, userInput) {
+  // Get current time to include
+  const currentUnixTime = Math.floor(Date.now() / 1000);
+  // Text that will appear above the image in the message embed
+  const embedDescription = userInput
+    ? `<t:${currentUnixTime}:R> <@${userId}> asked "${userInput}"`
+    : `<@${userId}>'s fortune awaits...`;
+
   const attachments = [
     {
       id: 0,
@@ -117,7 +124,7 @@ function buildFortuneEmbed(userId, fileName, header) {
   const payload = {
     embeds: [
       {
-        description: header,
+        description: embedDescription,
         image: { url: `attachment://${fileName}` },
         color: 8226557,
       },
@@ -138,11 +145,18 @@ One thing to note is that there are two ways you can add an image to an embed: a
 If we instead used a public URL, the code for our embed could be simplified quite a bit. For example:
 
 ```javascript
-function buildFortuneEmbed(userId, fileName, header) {
+function buildFortuneEmbed(userId, fileName, userInput) {
+  // Get current time to include
+  const currentUnixTime = Math.floor(Date.now() / 1000);
+  // Text that will appear above the image in the message embed
+  const embedDescription = userInput
+    ? `<t:${currentUnixTime}:R> <@${userId}> asked "${userInput}"`
+    : `<@${userId}>'s fortune awaits...`;
+
   const payload = {
     embeds: [
       {
-        description: header,
+        description: embedDescription,
         image: { url: 'https://urltoyour.com/image.png' },
         color: 8226557,
       },
@@ -163,8 +177,10 @@ Back up where you handle your command, paste the following (it's a lot but we'll
     const { name } = data;
 
     // Name of the application command
-    if (name === 'fortune') {
-      const userId = member.user ? member.user.id : 'Someone';
+        if (name === 'fortune') {
+      // Fetch the question the user asked (if it exists)
+      const userInput = data.options ? data.options[0]['value'] : null;
+      // Create the fortune image that we'll send to the user
       await generateRandomFortune(id);
 
       // See all interaction callback types https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type
@@ -175,16 +191,10 @@ Back up where you handle your command, paste the following (it's a lot but we'll
 
       // Use the unique ID as a temporary filename for the image we generate
       const fileName = `${id}-fortune.png`;
-      // Fetch the question the user asked (if it exists)
-      const userInput = data.options ? data.options[0]['value'] : null;
-      // Text that appears above the image in the message embed
-      const embedHeader = userInput
-        ? `<t:${currentUnixTime}:R> <@${userId}> asked "${userInput}"`
-        : `<@${userId}>'s fortune awaits...`;
       // Get image that was generated
       const generatedFortune = await fs.createReadStream(`./${fileName}`);
       // Build the payload for the Discord message
-      const embed = buildFortuneEmbed(userId, fileName, embedHeader);
+      const embed = buildFortuneEmbed(member.user.id, fileName, userInput);
 
       // Create the FormData for Discord request
       // FormData because we're doing a file upload
@@ -264,8 +274,8 @@ Now that we're handling and responding to the slash command, let's finish up by 
 
 #### Table of contents
 
-- [x] [Step 0 - Project setup](0-remix.md)
-- [x] [Step 1 - Create app](1-create-app.md)
-- [x] [Step 2 - Setup credentials and interactivity](2-setup.md)
-- [x] [Step 3 - Register and handle slash command](3-command.md)
+- [x] ~~[Step 0 - Project setup](0-remix.md)~~
+- [x] ~~[Step 1 - Create app](1-create-app.md)~~
+- [x] ~~[Step 2 - Setup credentials and interactivity](2-setup.md)~~
+- [x] ~~[Step 3 - Register and handle slash command](3-command.md)~~
 - [ ] 👉 **Next: [Step 4 - Add message components](4-components.md)**
