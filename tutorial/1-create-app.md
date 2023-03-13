@@ -1,5 +1,12 @@
 # Step 1: Configure and install your app
 
+In this step you'll:
+- Create your own Discord app
+- Become familiar with the Discord developer portal
+- Install your app to a test server
+
+---
+
 ## Create an app
 
 First, we'll need to create an app.

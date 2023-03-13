@@ -18,6 +18,11 @@ export function VerifyDiscordRequest(clientKey) {
   };
 }
 
+/**
+ * Create and send HTTP request to Discord
+ * @param endpoint Relative endpoint to call
+ * @param options  Any options to pass into the request
+ */
 export async function DiscordRequest(endpoint, options) {
   // append endpoint to root API URL
   const url = 'https://discord.com/api/v10/' + endpoint;

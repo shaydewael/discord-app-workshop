@@ -75,7 +75,6 @@ app.post('/interactions', async function (req, res) {
         `https://discord.com/api/v10/webhooks/${process.env.APP_ID}/${token}/messages/@original`,
         {
           headers: {
-            Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
             ...payload.getHeaders(),
           },
           method: 'PATCH',
@@ -127,7 +126,6 @@ app.post('/interactions', async function (req, res) {
         `https://discord.com/api/v10/webhooks/${process.env.APP_ID}/${token}/messages/@original`,
         {
           headers: {
-            Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
             ...headers,
           },
           method: 'PATCH',
