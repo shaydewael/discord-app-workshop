@@ -128,7 +128,7 @@ function buildFortuneEmbed(userId, fileName, userInput) {
         image: { url: `attachment://${fileName}` },
         color: 8226557,
       },
-    ]
+    ],
     attachments,
   };
 
