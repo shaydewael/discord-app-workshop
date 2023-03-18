@@ -60,7 +60,7 @@ Our endpoint is going to be made up of two parts:
 
 ### Glitch project URL
 
-To get your project URL, click the **Share** button in the top left of your Glitch project. Copy the URL for your project's **Live site** (ex: `https://chrome-scintillating-punishment.glitch.me`).
+To get your project URL, click the **Share** button in the top right of your Glitch project. Copy the URL for your project's **Live site** (ex: `https://chrome-scintillating-punishment.glitch.me`).
 
 > ⚠️ Your Glitch project URL is **not** just the URL where you edit your project. We specifically need the *public* URL for your project (make sure it ends in `.me`).
 
