@@ -129,7 +129,6 @@ function buildFortuneEmbed(userId, fileName, userInput) {
         color: 8226557,
       },
     ]
-    attachments,
   };
 
   // the payload needs to be stringified before we send it to Discord
